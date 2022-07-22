@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1> Calculator</h1>
+<p id="note">*press backspace to delete a mistake</p>
+<div id="calculator">
+
+<p id="display"></p>
+
+
+<div id="buttons">
+
+<button id="clear">CE</button>
+<button id="back">←</button>
+
+<button id="seven" onclick="seven()">7</button>
+<button id="eight" onclick="eight()">8</button>
+<button id="nine" onclick="nine()">9</button>
+<button id="divide" onclick="divide()">/</button>
+
+<button id="four" onclick="four()">4</button>
+<button id="five" onclick="five()">5</button>
+<button id="six" onclick="six()">6</button>
+<button id="multiply" onclick="multiply()">x</button>
+
+<button id="one" onclick="one()">1</button>
+<button id="two" onclick="two()">2</button>
+<button id="three" onclick="three()">3</button>
+<button id="minus" onclick="subtract()">-</button>
+
+<button id="zero" onclick="zero()">0</button>
+<button id="decimal" onclick="decimal()">.</button>
+<button id="equals" onclick="equal()">=</button>
+<button id="plus" onclick="add()">+</button>
+
+</div>
+</div>
+</body>
+<script>
+    let display =  document.getElementById('display');
+    let operator = {operator: ""};
+    let cleary = document.querySelector('#clear');
+   
+    cleary.addEventListener("click", clear);
+
+    function clear() {
+display.innerHTML = "";
+operator.operator = "";
+}
+
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+    if (key === "Backspace") {
+        display.innerHTML = display.innerHTML.slice(0, display.innerHTML.length - 1)
+    }
+})
+   
+let one = function() {
+    display.innerHTML += '1';
+
+}
+let two = function() {
+    display.innerHTML += '2';
+   
+}
+let three = function() {
+    display.innerHTML += '3';
+  
+}
+let four = function() {
+    display.innerHTML += '4';
+  
+}
+let five = function() {
+    display.innerHTML += '5';
+
+}
+let six = function() {
+    display.innerHTML += '6';
+   
+}
+let seven = function() {
+    display.innerHTML += '7';
+   
+}
+let eight = function() {
+    display.innerHTML += '8';
+  
+}
+let nine = function() {
+    display.innerHTML += '9';
+  
+}
+let zero = function() {
+    display.innerHTML += '0';
+   
+}
+let multiply = function() {
+    equal();
+    timesop();
+  
+    operator.operator = '*'
+}
+let divide = function() {
+    equal();
+    divop();
+  
+    operator.operator = '/';
+}
+let add = function() {
+     equal();
+ plusop();
+   
+    operator.operator = '+';
+}
+let subtract = function() {
+    equal();
+    minusop();
+   
+    operator.operator = '-';
+}
+let decimal = function() {
+    display.innerHTML += '.';
+   
+}
+let equal = function() {
+
+if (operator.operator === '+') {
+    plussplit = display.innerHTML.split('+');
+    let ans = +plussplit[0] + +plussplit[1];
+   
+    display.innerHTML = +ans;
+}
+if (operator.operator === '-') {
+     minsplit = display.innerHTML.split('-');
+    let ans = +minsplit[0] - +minsplit[1];
+  
+    display.innerHTML = +ans;
+}
+if (operator.operator === '*') {
+    mulsplit = display.innerHTML.split('x');
+    let ans = +mulsplit[0] * +mulsplit[1];
+    
+    display.innerHTML = +ans;
+}
+if (operator.operator === '/') {
+     divsplit = display.innerHTML.split('/');
+     if (+divsplit[1] === 0) {
+        alert('You can\'t do that!!!');
+clear();
+     }
+     else {
+    let ans = +divsplit[0] / +divsplit[1];
+   
+    display.innerHTML = +ans;}
+}
+else {
+    display.innerHTML = display.innerHTML;
+}
+operator.operator = "";
+}
+
+let split;
+let plusop = function() {
+if (display.innerHTML.includes('-')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('-', '+');
+    
+    }
+if (display.innerHTML.includes('+')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('+', '+');
+    
+    }
+if (display.innerHTML.includes('/')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('/', '+');
+    
+    }
+if (display.innerHTML.includes('x')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('x', '+');
+    
+}
+else if (display.innerHTML.includes('+') == false) {display.innerHTML += '+';};
+}
+let minusop = function() {
+if (display.innerHTML.includes('-')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('-', '-');
+    
+    }
+if (display.innerHTML.includes('+')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('+', '-');
+    
+    }
+if (display.innerHTML.includes('/')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('/', '-');
+    
+    }
+if (display.innerHTML.includes('x')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('x', '-');
+    
+}
+else if (display.innerHTML.includes('-') == false) {display.innerHTML += '-';};
+}
+let divop = function() {
+if (display.innerHTML.includes('-')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('-', '/');
+    
+    }
+if (display.innerHTML.includes('+')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('+', '/');
+    
+    }
+if (display.innerHTML.includes('/')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('/', '/');
+    
+    }
+if (display.innerHTML.includes('x')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('x', '/');
+    
+}
+else if (display.innerHTML.includes('/') == false) {display.innerHTML += '/';};
+}
+let timesop = function() {
+if (display.innerHTML.includes('-')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('-', 'x');
+    
+    }
+if (display.innerHTML.includes('+')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('+', 'x');
+    
+    }
+if (display.innerHTML.includes('/')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('/', 'x');
+    
+    }
+if (display.innerHTML.includes('x')) {
+    document.getElementById('display').innerHTML = display.innerHTML.replace('x', 'x');
+    
+}
+else if (display.innerHTML.includes('x') == false) {display.innerHTML += 'x';};
+}
+</script>
+</html> 
